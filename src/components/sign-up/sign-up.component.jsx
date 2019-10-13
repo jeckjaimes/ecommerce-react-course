@@ -43,7 +43,12 @@ class SignUp extends React.Component {
         } catch (error) {
             console.error(error);
         }
-        this.setState({ email: '', password: '' });
+        this.setState({ 
+            displayName: '',
+            email: '',
+            password: '',
+            confirmPassword: '' 
+        });
     }
 
     handleChange = event => {
