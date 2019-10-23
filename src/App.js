@@ -16,30 +16,16 @@ import { setCurrentUser } from './redux/user/user.actions';
 import { selectCurrentUser } from "./redux/user/user.selectors";
 
 class App extends React.Component {
-  /* constructor() {
-    super();
-
-    this.state = {
-      currentUser: null
-    }
-  } */
 
   unsubscribeFromAuth = null;
 
   componentDidMount() {
-    const { setCurrentUser } = this.props; 
+    const { setCurrentUser } = this.props;
 
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth); // Creo el usuario ( función creada en el archivo de firebase)
-
         userRef.onSnapshot(snapShot => { // Luego solicito ese usuario junto con su id y data correspondiente
-          /* this.setState({ // Agrego la solicitud al currentUser
-            currentUser: {
-              id: snapShot.id,
-              ...snapShot.data()
-            }
-          }); */
           setCurrentUser({ // Agrego la solicitud al currentUser
             currentUser: {
               id: snapShot.id,
@@ -47,9 +33,7 @@ class App extends React.Component {
             }
           });
         });
-
       } else {
-        /* this.setState({ currentUser: userAuth }); */
         setCurrentUser(userAuth);
       }
     });
